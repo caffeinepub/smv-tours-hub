@@ -59,6 +59,44 @@ export function ContactSection() {
     );
   };
 
+  const contactCards = [
+    {
+      icon: "👨\u200d💼",
+      label: "Founded By",
+      value: "Mr. Yashwanth Kumar",
+      sub: "Serving with pride since 16 years",
+      isFounder: true,
+    },
+    {
+      icon: "📱",
+      label: "Yashwanth Kumar",
+      value: "+91 99729 79045 / +91 87626 80991",
+      sub: "Call / WhatsApp",
+      isFounder: false,
+    },
+    {
+      icon: "📞",
+      label: "Ravikumar",
+      value: "+91 63636 01311",
+      sub: "Call / WhatsApp",
+      isFounder: false,
+    },
+    {
+      icon: "📧",
+      label: "Email Us",
+      value: "info@smvtourshub.com",
+      sub: "Response within 2 hours",
+      isFounder: false,
+    },
+    {
+      icon: "📍",
+      label: "Our Office",
+      value: "Mumbai, Maharashtra, India",
+      sub: "Serving all of India",
+      isFounder: false,
+    },
+  ];
+
   return (
     <section
       id="contact"
@@ -108,59 +146,96 @@ export function ContactSection() {
 
             {/* Contact Info Cards */}
             <div className="space-y-4">
-              {[
-                {
-                  icon: "📱",
-                  label: "Call / WhatsApp",
-                  value: "+91 98765 43210",
-                  sub: "Mon-Sun: 6 AM – 11 PM",
-                },
-                {
-                  icon: "📧",
-                  label: "Email Us",
-                  value: "info@smvtourshub.com",
-                  sub: "Response within 2 hours",
-                },
-                {
-                  icon: "📍",
-                  label: "Our Office",
-                  value: "Mumbai, Maharashtra, India",
-                  sub: "Serving all of India",
-                },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-start gap-4 p-4 rounded-xl"
-                  style={{
-                    background: "white",
-                    border: "1px solid oklch(0.9 0.01 85)",
-                    boxShadow: "0 2px 12px oklch(0.18 0.02 250 / 0.04)",
-                  }}
-                >
+              {contactCards.map((item) =>
+                item.isFounder ? (
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                    key={item.label}
+                    className="flex items-start gap-4 p-4 rounded-xl"
                     style={{
-                      background: "oklch(0.65 0.18 45 / 0.1)",
+                      background:
+                        "linear-gradient(135deg, oklch(0.99 0.025 85) 0%, oklch(0.97 0.04 70) 100%)",
+                      border: "1.5px solid oklch(0.78 0.13 60)",
+                      boxShadow:
+                        "0 4px 16px oklch(0.65 0.18 45 / 0.12), inset 0 1px 0 oklch(1 0 0 / 0.6)",
                     }}
                   >
-                    {item.icon}
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
-                      {item.label}
-                    </div>
                     <div
-                      className="font-display font-bold"
-                      style={{ color: "oklch(0.18 0.02 250)" }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, oklch(0.78 0.13 60 / 0.25) 0%, oklch(0.65 0.18 45 / 0.15) 100%)",
+                        border: "1px solid oklch(0.78 0.13 60 / 0.4)",
+                      }}
                     >
-                      {item.value}
+                      {item.icon}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-0.5">
-                      {item.sub}
+                    <div className="flex-1">
+                      <div
+                        className="text-xs font-bold uppercase tracking-wider mb-0.5"
+                        style={{ color: "oklch(0.55 0.15 55)" }}
+                      >
+                        {item.label}
+                      </div>
+                      <div
+                        className="font-display font-bold text-lg leading-tight"
+                        style={{ color: "oklch(0.22 0.06 45)" }}
+                      >
+                        {item.value}
+                      </div>
+                      <div
+                        className="text-xs font-medium mt-0.5"
+                        style={{ color: "oklch(0.55 0.12 55)" }}
+                      >
+                        ✦ {item.sub}
+                      </div>
+                    </div>
+                    {/* Founder badge */}
+                    <div
+                      className="flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider self-start"
+                      style={{
+                        background: "oklch(0.65 0.18 45)",
+                        color: "white",
+                        letterSpacing: "0.05em",
+                      }}
+                    >
+                      Founder
                     </div>
                   </div>
-                </div>
-              ))}
+                ) : (
+                  <div
+                    key={item.label}
+                    className="flex items-start gap-4 p-4 rounded-xl"
+                    style={{
+                      background: "white",
+                      border: "1px solid oklch(0.9 0.01 85)",
+                      boxShadow: "0 2px 12px oklch(0.18 0.02 250 / 0.04)",
+                    }}
+                  >
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                      style={{
+                        background: "oklch(0.65 0.18 45 / 0.1)",
+                      }}
+                    >
+                      {item.icon}
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
+                        {item.label}
+                      </div>
+                      <div
+                        className="font-display font-bold"
+                        style={{ color: "oklch(0.18 0.02 250)" }}
+                      >
+                        {item.value}
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-0.5">
+                        {item.sub}
+                      </div>
+                    </div>
+                  </div>
+                ),
+              )}
             </div>
           </div>
 

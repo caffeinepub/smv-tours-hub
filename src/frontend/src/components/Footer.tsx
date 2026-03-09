@@ -16,6 +16,26 @@ const destinations = [
   "Char Dham Yatra",
 ];
 
+const contactItems = [
+  {
+    icon: "📱",
+    label: "Yashwanth Kumar: +91 99729 79045",
+    sub: "+91 87626 80991",
+  },
+  {
+    icon: "📞",
+    label: "Ravikumar: +91 63636 01311",
+    sub: "Call / WhatsApp",
+  },
+  { icon: "📧", label: "info@smvtourshub.com", sub: "Email Us" },
+  { icon: "📍", label: "Mumbai, Maharashtra", sub: "India" },
+  {
+    icon: "⏰",
+    label: "Mon – Sun: 6AM – 11PM",
+    sub: "Support Hours",
+  },
+];
+
 export function Footer() {
   const scrollTo = (href: string) => {
     const id = href.replace("#", "");
@@ -152,20 +172,7 @@ export function Footer() {
               Contact Us
             </h4>
             <div className="space-y-4">
-              {[
-                {
-                  icon: "📱",
-                  label: "+91 98765 43210",
-                  sub: "Call / WhatsApp",
-                },
-                { icon: "📧", label: "info@smvtourshub.com", sub: "Email Us" },
-                { icon: "📍", label: "Mumbai, Maharashtra", sub: "India" },
-                {
-                  icon: "⏰",
-                  label: "Mon – Sun: 6AM – 11PM",
-                  sub: "Support Hours",
-                },
-              ].map((item) => (
+              {contactItems.map((item) => (
                 <div key={item.label} className="flex items-start gap-3">
                   <span className="text-base mt-0.5 flex-shrink-0">
                     {item.icon}
