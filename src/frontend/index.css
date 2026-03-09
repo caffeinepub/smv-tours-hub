@@ -1,0 +1,1277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === FONT FACES === */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans[wght].woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* SMV Tours Hub - Saffron Orange & Deep Navy */
+    --background: 0.98 0.005 85;
+    --foreground: 0.18 0.02 250;
+
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.02 250;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.02 250;
+
+    /* Saffron Orange Primary */
+    --primary: 0.65 0.18 45;
+    --primary-foreground: 1 0 0;
+
+    /* Warm Amber Secondary */
+    --secondary: 0.92 0.04 75;
+    --secondary-foreground: 0.25 0.05 250;
+
+    /* Deep Golden Accent */
+    --accent: 0.72 0.17 60;
+    --accent-foreground: 0.15 0 0;
+
+    --muted: 0.94 0.01 90;
+    --muted-foreground: 0.52 0.02 250;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.015 85;
+    --input: 0.88 0.015 85;
+    --ring: 0.65 0.18 45;
+
+    /* Dark section background */
+    --dark-section: 0.16 0.03 250;
+    --dark-section-text: 0.95 0.01 85;
+
+    --chart-1: 0.65 0.18 45;
+    --chart-2: 0.72 0.17 60;
+    --chart-3: 0.55 0.15 30;
+    --chart-4: 0.45 0.12 260;
+    --chart-5: 0.6 0.14 200;
+
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.18 0.02 250;
+    --sidebar-primary: 0.65 0.18 45;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.92 0.04 75;
+    --sidebar-accent-foreground: 0.25 0.05 250;
+    --sidebar-border: 0.88 0.015 85;
+    --sidebar-ring: 0.65 0.18 45;
+  }
+
+  * {
+    @apply border-border;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+/* === ANIMATION CLASSES === */
+@layer utilities {
+  /* Base hidden state */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-slide-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .animate-slide-left.in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-slide-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .animate-slide-right.in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-scale-in {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .animate-scale-in.in-view {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Stagger delays */
+  .delay-100 { transition-delay: 100ms !important; }
+  .delay-200 { transition-delay: 200ms !important; }
+  .delay-300 { transition-delay: 300ms !important; }
+  .delay-400 { transition-delay: 400ms !important; }
+  .delay-500 { transition-delay: 500ms !important; }
+  .delay-600 { transition-delay: 600ms !important; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+    .animate-slide-left,
+    .animate-slide-right,
+    .animate-scale-in {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* === HERO ANIMATIONS === */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroWordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@keyframes heroPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  animation: heroWordReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.float-badge {
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+.spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.marquee-track {
+  animation: marquee 25s linear infinite;
+}
+
+/* === SECTION BACKGROUNDS === */
+.section-dark {
+  background: oklch(0.16 0.03 250);
+  color: oklch(0.95 0.01 85);
+}
+
+.section-warm {
+  background: oklch(0.97 0.02 75);
+}
+
+/* === GRADIENT TEXT === */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.18 45) 0%,
+    oklch(0.65 0.2 35) 50%,
+    oklch(0.78 0.16 65) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === CARD HOVER EFFECTS === */
+.fleet-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.fleet-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 30px 60px oklch(0 0 0 / 0.3);
+}
+
+.fleet-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    oklch(0.16 0.03 250 / 0.95) 0%,
+    oklch(0.16 0.03 250 / 0.3) 60%,
+    transparent 100%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.destination-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.destination-card:hover {
+  transform: translateY(-10px);
+}
+
+.destination-card img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.destination-card:hover img {
+  transform: scale(1.08);
+}
+
+.destination-card .card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    oklch(0.16 0.03 250 / 0.9) 0%,
+    transparent 50%
+  );
+  transition: background 0.4s ease;
+}
+
+.destination-card:hover .card-overlay {
+  background: linear-gradient(
+    to top,
+    oklch(0.16 0.03 250 / 0.95) 0%,
+    oklch(0.65 0.18 45 / 0.3) 100%
+  );
+}
+
+/* === NAVBAR === */
+.navbar-scrolled {
+  background: oklch(0.16 0.03 250 / 0.97) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 40px oklch(0 0 0 / 0.2);
+}
+
+/* === STATS COUNTER === */
+.stat-number {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, oklch(0.72 0.18 45), oklch(0.78 0.16 65));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === TESTIMONIALS === */
+.testimonial-card {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+/* === BUTTONS === */
+.btn-primary {
+  background: linear-gradient(135deg, oklch(0.65 0.18 45), oklch(0.58 0.2 35));
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-family: "Bricolage Grotesque", sans-serif;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 4px 20px oklch(0.65 0.18 45 / 0.4);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px oklch(0.65 0.18 45 / 0.5);
+  filter: brightness(1.05);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-family: "Bricolage Grotesque", sans-serif;
+  letter-spacing: 0.02em;
+  border: 2px solid oklch(1 0 0 / 0.7);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: oklch(1 0 0 / 0.1);
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+/* === SECTION HEADING === */
+.section-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: oklch(0.65 0.18 45);
+  margin-bottom: 0.75rem;
+}
+
+/* === NOISE TEXTURE OVERLAY === */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* === PARALLAX HERO === */
+.hero-parallax {
+  will-change: transform;
+}
+
+/* === SERVICE CARD === */
+.service-card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 24px oklch(0.18 0.02 250 / 0.06);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease;
+  border: 1px solid oklch(0.92 0.01 85);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px oklch(0.18 0.02 250 / 0.12);
+  border-color: oklch(0.65 0.18 45 / 0.3);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, oklch(0.65 0.18 45 / 0.12), oklch(0.72 0.17 60 / 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* === TESTIMONIAL === */
+.testimonial-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: oklch(0.88 0.015 85);
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.testimonial-dot.active {
+  background: oklch(0.65 0.18 45);
+  transform: scale(1.3);
+}
+
+/* === FORM === */
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1.5px solid oklch(0.88 0.015 85);
+  border-radius: 0.75rem;
+  background: white;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
+  color: oklch(0.18 0.02 250);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: oklch(0.65 0.18 45);
+  box-shadow: 0 0 0 3px oklch(0.65 0.18 45 / 0.15);
+}
+
+.form-input::placeholder {
+  color: oklch(0.62 0.01 250);
+}
+
+/* === MARQUEE STRIP === */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+}
+
+/* === DRIVER CHARACTER ANIMATIONS === */
+
+/* Smooth idle bob: gently floats up and down */
+@keyframes driverIdle {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  40% { transform: translateY(-8px) scale(1.01); }
+  70% { transform: translateY(-3px) scale(1.005); }
+}
+
+/* Wave: bob with slight tilt to simulate energetic waving */
+@keyframes driverWave {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  20% { transform: translateY(-6px) rotate(2.5deg) scale(1.02); }
+  50% { transform: translateY(-10px) rotate(-2deg) scale(1.03); }
+  75% { transform: translateY(-5px) rotate(1.5deg) scale(1.01); }
+}
+
+/* Thumbs up: pop scale + steady proud bob */
+@keyframes driverThumbsup {
+  0% { transform: translateY(0) scale(0.9); }
+  15% { transform: translateY(-10px) scale(1.06); }
+  35% { transform: translateY(-6px) scale(1.03); }
+  60% { transform: translateY(-9px) scale(1.04); }
+  80% { transform: translateY(-5px) scale(1.02); }
+  100% { transform: translateY(-7px) scale(1.03); }
+}
+
+/* Character swap fade-in */
+@keyframes charEnter {
+  0% { opacity: 0; transform: scale(0.88) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes photoReveal {
+  0% { opacity: 0; transform: scale(0.7) rotate(-5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-3deg); }
+}
+
+@keyframes speechBubblePop {
+  0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.driver-idle {
+  animation: driverIdle 2s ease-in-out infinite;
+}
+
+.driver-wave {
+  animation: driverWave 1.1s ease-in-out infinite;
+}
+
+.driver-thumbsup {
+  animation: driverThumbsup 1.8s ease-in-out infinite;
+}
+
+.driver-char-enter {
+  animation: charEnter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.driver-photo-reveal {
+  animation: photoReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.driver-speech-pop {
+  animation: speechBubblePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Speech bubble right-pointing arrow */
+.speech-bubble-right::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 8px 0 8px 12px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+  filter: drop-shadow(2px 0 2px oklch(0 0 0 / 0.1));
+}
+
+/* Reduced motion for character */
+@media (prefers-reduced-motion: reduce) {
+  .driver-idle,
+  .driver-wave,
+  .driver-thumbsup,
+  .driver-char-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .driver-photo-reveal,
+  .driver-speech-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* === HERO CAPTAIN WALKING CHARACTER === */
+
+/* Captain walks left to right across the hero */
+@keyframes captainWalk {
+  0%   { transform: translateX(-160px); }
+  100% { transform: translateX(calc(100vw + 160px)); }
+}
+
+/* Subtle vertical bob while walking (leg swing simulation) */
+@keyframes captainBob {
+  0%, 100% { transform: translateY(0px) scaleX(1); }
+  25%       { transform: translateY(-7px) scaleX(1.02); }
+  50%       { transform: translateY(-2px) scaleX(1); }
+  75%       { transform: translateY(-5px) scaleX(0.99); }
+}
+
+/* Idle gentle float when paused for a pose */
+@keyframes captainIdleBob {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Shadow pulses underfoot */
+@keyframes captainShadow {
+  0%, 100% { transform: translateX(-50%) scaleX(1);   opacity: 0.28; }
+  50%       { transform: translateX(-50%) scaleX(0.7); opacity: 0.15; }
+}
+
+/* Pop-in animation when character switches image */
+@keyframes captainPosePop {
+  0%   { transform: scale(0.8) translateY(10px); opacity: 0.6; }
+  55%  { transform: scale(1.08) translateY(-5px); opacity: 1; }
+  100% { transform: scale(1) translateY(0);        opacity: 1; }
+}
+
+/* Speech bubble appear */
+@keyframes bubbleFadeIn {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(8px) scale(0.85); }
+  60%  { transform: translateX(-50%) translateY(-3px) scale(1.03); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(0)  scale(1);     opacity: 1; }
+}
+
+/* Walking: translate track moves the whole assembly */
+.captain-walk-track {
+  display: inline-block;
+  position: relative;
+}
+
+.captain-walking {
+  animation: captainWalk 16s linear forwards;
+}
+
+/* Paused at a pose — stays where walk left off; we just hold position */
+.captain-paused {
+  /* no walk animation; stays at current position */
+  animation: none;
+}
+
+/* Bob while walking */
+.captain-bob-anim {
+  animation: captainBob 0.5s ease-in-out infinite;
+}
+
+/* Gentle float while standing still */
+.captain-idle-bob {
+  animation: captainIdleBob 1.6s ease-in-out infinite;
+}
+
+/* Shadow */
+.captain-shadow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 80px;
+  height: 14px;
+  border-radius: 50%;
+  background: oklch(0 0 0 / 0.3);
+  filter: blur(5px);
+}
+
+.captain-shadow-anim {
+  animation: captainShadow 0.5s ease-in-out infinite;
+}
+
+/* Character image */
+.captain-pose-img {
+  width: 130px;
+  height: auto;
+  display: block;
+  user-select: none;
+  filter: drop-shadow(0 6px 18px oklch(0 0 0 / 0.4));
+  background: transparent;
+}
+
+/* Pose pop in on swap */
+.captain-pose-pop {
+  animation: captainPosePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Speech bubble */
+.captain-speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: oklch(0.2 0.02 250);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  border: 2px solid oklch(0.65 0.18 45 / 0.5);
+  box-shadow: 0 4px 20px oklch(0 0 0 / 0.15);
+  animation: bubbleFadeIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  z-index: 10;
+}
+
+/* Downward pointing tail */
+.captain-bubble-tail {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 9px solid white;
+  filter: drop-shadow(0 2px 1px oklch(0.65 0.18 45 / 0.2));
+}
+
+/* Reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  .captain-walking,
+  .captain-bob-anim,
+  .captain-idle-bob,
+  .captain-shadow-anim,
+  .captain-pose-pop,
+  .captain-speech-bubble {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ====================================================
+   SMV MASCOT — Pure SVG Animated Character
+   ==================================================== */
+
+/* Entrance pop-in when mood changes */
+@keyframes mascotEntrance {
+  0%   { opacity: 0; transform: scale(0.7) translateY(20px); }
+  55%  { transform: scale(1.08) translateY(-5px); opacity: 1; }
+  75%  { transform: scale(0.96) translateY(2px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.mascot-entrance {
+  animation: mascotEntrance 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Idle: gentle breathe-bob */
+@keyframes mascotBodyIdle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  40%       { transform: translateY(-6px) rotate(0.5deg); }
+  70%       { transform: translateY(-3px) rotate(-0.3deg); }
+}
+
+.mascot-body-idle {
+  animation: mascotBodyIdle 2.4s ease-in-out infinite;
+}
+
+/* Wave: energetic side sway */
+@keyframes mascotBodyWave {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  20%       { transform: translateY(-8px) rotate(2deg); }
+  50%       { transform: translateY(-4px) rotate(-1.5deg); }
+  75%       { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+.mascot-body-wave {
+  animation: mascotBodyWave 0.9s ease-in-out infinite;
+}
+
+/* Excited: bounce jump */
+@keyframes mascotBodyExcited {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  20%       { transform: translateY(-12px) scale(1.04); }
+  40%       { transform: translateY(-5px) scale(1.01); }
+  60%       { transform: translateY(-10px) scale(1.03); }
+  80%       { transform: translateY(-3px) scale(1.01); }
+}
+
+.mascot-body-excited {
+  animation: mascotBodyExcited 0.7s ease-in-out infinite;
+}
+
+/* Drive: forward lean */
+@keyframes mascotBodyDrive {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-5px) rotate(1deg); }
+}
+
+.mascot-body-drive {
+  animation: mascotBodyDrive 1.2s ease-in-out infinite;
+}
+
+/* Arm wave: rotates the right arm up and down */
+@keyframes armWave {
+  0%, 100% { transform: rotate(-10deg); }
+  30%       { transform: rotate(-60deg); }
+  60%       { transform: rotate(-30deg); }
+  80%       { transform: rotate(-55deg); }
+}
+
+.mascot-arm-wave {
+  animation: armWave 0.65s ease-in-out infinite;
+}
+
+/* Idle arm: very subtle natural hang */
+@keyframes armIdle {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(3deg); }
+}
+
+.mascot-arm-idle {
+  animation: armIdle 2.4s ease-in-out infinite;
+}
+
+/* Drive arm: forward grip */
+@keyframes armDrive {
+  0%, 100% { transform: rotate(-15deg); }
+  50%       { transform: rotate(-5deg); }
+}
+
+.mascot-arm-drive {
+  animation: armDrive 1.2s ease-in-out infinite;
+}
+
+/* Rest arm */
+.mascot-arm-rest {
+  animation: armIdle 2.4s ease-in-out infinite;
+}
+
+/* Sparkle rotate */
+@keyframes sparkle1 {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%       { transform: scale(1.4) rotate(20deg); opacity: 0.8; }
+}
+@keyframes sparkle2 {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+  40%       { transform: scale(1.3) rotate(-15deg); opacity: 1; }
+}
+@keyframes sparkle3 {
+  0%, 100% { transform: scale(0.8) rotate(10deg); opacity: 0.7; }
+  60%       { transform: scale(1.2) rotate(-10deg); opacity: 1; }
+}
+
+.mascot-sparkle-1 { animation: sparkle1 1.0s ease-in-out infinite; }
+.mascot-sparkle-2 { animation: sparkle2 0.85s ease-in-out infinite; }
+.mascot-sparkle-3 { animation: sparkle3 0.7s ease-in-out infinite; }
+
+/* Road lines scroll */
+@keyframes roadScroll {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -28; }
+}
+
+.mascot-road line {
+  animation: roadScroll 0.5s linear infinite;
+}
+
+/* Floating particles */
+@keyframes particleFloat {
+  0%   { transform: translateY(0px) scale(0); opacity: 0; }
+  20%  { opacity: 1; transform: translateY(-10px) scale(1); }
+  80%  { opacity: 0.6; transform: translateY(-40px) scale(0.8); }
+  100% { transform: translateY(-60px) scale(0); opacity: 0; }
+}
+
+.mascot-particle {
+  animation: particleFloat 1.8s ease-out infinite;
+}
+
+/* Speech bubble pop-in */
+@keyframes bubblePop {
+  0%   { opacity: 0; transform: scale(0.75) translateY(6px); }
+  60%  { transform: scale(1.05) translateY(-2px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.mascot-bubble {
+  animation: bubblePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* SVG itself — prevent layout shifts */
+.mascot-character-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mascot-entrance,
+  .mascot-body-idle,
+  .mascot-body-wave,
+  .mascot-body-excited,
+  .mascot-body-drive,
+  .mascot-arm-wave,
+  .mascot-arm-idle,
+  .mascot-arm-drive,
+  .mascot-arm-rest,
+  .mascot-sparkle-1,
+  .mascot-sparkle-2,
+  .mascot-sparkle-3,
+  .mascot-particle,
+  .mascot-bubble {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ====================================================
+   SMV MASCOT — Image-Based Character Animations
+   Uploaded captain: /assets/uploads/Hero-01-1.png
+   ==================================================== */
+
+/* Idle: gentle float + slight tilt — "breathing" feel */
+@keyframes charImgIdle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  30%  { transform: translateY(-10px) rotate(1.5deg); }
+  60%  { transform: translateY(-5px) rotate(-1deg); }
+  80%  { transform: translateY(-8px) rotate(0.8deg); }
+}
+
+/* Wave: energetic side-sway + scaleX wobble */
+@keyframes charImgWave {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scaleX(1); }
+  20%  { transform: translateY(-12px) rotate(3deg) scaleX(1.02); }
+  50%  { transform: translateY(-6px) rotate(-2.5deg) scaleX(0.99); }
+  75%  { transform: translateY(-10px) rotate(2deg) scaleX(1.01); }
+}
+
+/* Excited: bouncy jump — pops up and lands */
+@keyframes charImgExcited {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  15%  { transform: translateY(-16px) scale(1.06); }
+  30%  { transform: translateY(-4px) scale(1.01); }
+  50%  { transform: translateY(-14px) scale(1.05); }
+  70%  { transform: translateY(-3px) scale(1.01); }
+  85%  { transform: translateY(-12px) scale(1.04); }
+}
+
+/* Drive: forward lean with vibrating shake */
+@keyframes charImgDrive {
+  0%, 100% { transform: translateY(0px) rotate(-1.5deg) skewX(-1deg); }
+  25%  { transform: translateY(-3px) rotate(1deg) skewX(1deg); }
+  50%  { transform: translateY(-1px) rotate(-1deg) skewX(-0.5deg); }
+  75%  { transform: translateY(-4px) rotate(0.5deg) skewX(0.5deg); }
+}
+
+/* Entrance pop-in: scale bounce on mood change */
+@keyframes charImgEnter {
+  0%   { opacity: 0.5; transform: scale(0.82) translateY(15px); }
+  55%  { transform: scale(1.07) translateY(-6px); opacity: 1; }
+  80%  { transform: scale(0.97) translateY(1px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Sparkle dots floating up and fading */
+@keyframes sparkleFloat {
+  0%   { transform: translateY(0) scale(0); opacity: 0; }
+  25%  { opacity: 1; transform: translateY(-15px) scale(1); }
+  75%  { opacity: 0.5; transform: translateY(-38px) scale(0.7); }
+  100% { transform: translateY(-58px) scale(0); opacity: 0; }
+}
+
+/* Road line scrolling for drive mood */
+@keyframes roadLineScroll {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -52; }
+}
+
+.char-img-idle    { animation: charImgIdle    2.2s ease-in-out infinite; }
+.char-img-wave    { animation: charImgWave    0.85s ease-in-out infinite; }
+.char-img-excited { animation: charImgExcited 0.65s ease-in-out infinite; }
+.char-img-drive   { animation: charImgDrive   0.45s ease-in-out infinite; }
+.char-img-enter   { animation: charImgEnter   0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.sparkle-float    { animation: sparkleFloat   1.5s ease-out infinite; }
+.mascot-road-line { animation: roadLineScroll 0.7s linear infinite; }
+
+/* Reduced motion for image mascot */
+@media (prefers-reduced-motion: reduce) {
+  .char-img-idle,
+  .char-img-wave,
+  .char-img-excited,
+  .char-img-drive,
+  .char-img-enter,
+  .sparkle-float,
+  .mascot-road-line {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ====================================================
+   SMV MASCOT — Car animations
+   ==================================================== */
+
+/* Subtle up-down float for the car */
+@keyframes carFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50%       { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* Car slides in from right + scales up on reveal */
+@keyframes carEnter {
+  0%   { opacity: 0; transform: translateX(calc(-50% + 60px)) scale(0.8); }
+  60%  { transform: translateX(calc(-50% - 6px)) scale(1.03); opacity: 1; }
+  80%  { transform: translateX(calc(-50% + 3px)) scale(0.98); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+/* Drive mode: slight vibrate-shimmy */
+@keyframes carDrive {
+  0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+  20%       { transform: translateX(-50%) translateY(-3px) rotate(0.4deg); }
+  40%       { transform: translateX(-50%) translateY(-1px) rotate(-0.3deg); }
+  60%       { transform: translateX(-50%) translateY(-4px) rotate(0.3deg); }
+  80%       { transform: translateX(-50%) translateY(-2px) rotate(-0.2deg); }
+}
+
+.car-float { animation: carFloat 2s ease-in-out infinite; }
+.car-drive  { animation: carDrive 0.5s ease-in-out infinite; }
+.car-enter  { animation: carEnter 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+/* Reduced motion for car */
+@media (prefers-reduced-motion: reduce) {
+  .car-float,
+  .car-drive,
+  .car-enter {
+    animation: none !important;
+    opacity: 1;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* ====================================================
+   CHARACTER GUIDE — Fixed overlay side character
+   ==================================================== */
+
+/* Character image sizing */
+.guide-char-img {
+  width: 160px;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .guide-char-img {
+    width: 100px;
+  }
+
+  /* Mobile: position bottom-right instead of vertically centered */
+  [data-ocid="guide.section"] {
+    top: auto !important;
+    bottom: 80px !important;
+    transform: none !important;
+  }
+}
+
+/* Underfoot shadow */
+.guide-char-shadow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 12px;
+  border-radius: 50%;
+  background: oklch(0 0 0 / 0.2);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* ── Idle: gentle float ── */
+@keyframes guideCharIdle {
+  0%, 100% { transform: translateY(0px); }
+  40%       { transform: translateY(-9px); }
+  70%       { transform: translateY(-4px); }
+}
+
+/* ── Wave: tilt left-right ── */
+@keyframes guideCharWave {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  20%       { transform: translateY(-8px) rotate(4deg); }
+  50%       { transform: translateY(-12px) rotate(-3.5deg); }
+  75%       { transform: translateY(-6px) rotate(3deg); }
+}
+
+/* ── Bounce: jump up-down ── */
+@keyframes guideCharBounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  20%       { transform: translateY(-14px) scale(1.05); }
+  40%       { transform: translateY(-4px) scale(1.01); }
+  60%       { transform: translateY(-11px) scale(1.04); }
+  80%       { transform: translateY(-3px) scale(1.01); }
+}
+
+/* ── Excited: quick wiggle/shake ── */
+@keyframes guideCharExcited {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  15%       { transform: translateX(-5px) rotate(-2.5deg); }
+  30%       { transform: translateX(5px) rotate(2.5deg) translateY(-8px); }
+  50%       { transform: translateX(-4px) rotate(-2deg) translateY(-5px); }
+  70%       { transform: translateX(4px) rotate(2deg) translateY(-10px); }
+  85%       { transform: translateX(-3px) rotate(-1.5deg); }
+}
+
+/* ── Celebrate: big bounce + spin ── */
+@keyframes guideCharCelebrate {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  20%       { transform: translateY(-16px) rotate(-4deg) scale(1.06); }
+  40%       { transform: translateY(-6px) rotate(3deg) scale(1.02); }
+  60%       { transform: translateY(-14px) rotate(-3deg) scale(1.05); }
+  80%       { transform: translateY(-4px) rotate(2deg) scale(1.01); }
+}
+
+/* ── Body mood animations (used via inline styles) ── */
+@keyframes guideBodyWave {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  20%       { transform: translateY(-10px) rotate(4deg); }
+  50%       { transform: translateY(-14px) rotate(-3.5deg); }
+  75%       { transform: translateY(-7px) rotate(3deg); }
+}
+
+@keyframes guideBodyBounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  20%       { transform: translateY(-16px) scale(1.06); }
+  40%       { transform: translateY(-5px) scale(1.01); }
+  60%       { transform: translateY(-13px) scale(1.04); }
+  80%       { transform: translateY(-3px) scale(1.01); }
+}
+
+@keyframes guideBodyExcited {
+  0%, 100% { transform: translateX(0px) rotate(0deg) translateY(0); }
+  15%       { transform: translateX(-6px) rotate(-3deg) translateY(-5px); }
+  30%       { transform: translateX(6px) rotate(3deg) translateY(-10px); }
+  50%       { transform: translateX(-5px) rotate(-2.5deg) translateY(-6px); }
+  70%       { transform: translateX(5px) rotate(2.5deg) translateY(-12px); }
+  85%       { transform: translateX(-3px) rotate(-1.5deg) translateY(-4px); }
+}
+
+@keyframes guideBodyCelebrate {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  20%       { transform: translateY(-18px) rotate(-5deg) scale(1.07); }
+  40%       { transform: translateY(-7px) rotate(4deg) scale(1.02); }
+  60%       { transform: translateY(-16px) rotate(-3.5deg) scale(1.06); }
+  80%       { transform: translateY(-4px) rotate(2.5deg) scale(1.01); }
+}
+
+@keyframes guideBodyThumbsup {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  30%       { transform: translateY(-10px) scale(1.05); }
+  60%       { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes guideBodyShake {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25%       { transform: translateX(-4px) rotate(-2deg); }
+  75%       { transform: translateX(4px) rotate(2deg); }
+}
+
+@keyframes guideBodyIdle {
+  0%, 100% { transform: translateY(0px); }
+  40%       { transform: translateY(-9px); }
+  70%       { transform: translateY(-4px); }
+}
+
+/* ── Arm wave for the SVG overlay arm ── */
+@keyframes armWaveGuide {
+  0%, 100% { transform: rotate(-10deg) translateY(0px); }
+  30%       { transform: rotate(-65deg) translateY(-5px); }
+  60%       { transform: rotate(-35deg) translateY(-2px); }
+  80%       { transform: rotate(-60deg) translateY(-4px); }
+}
+
+/* ── Phone shake ── */
+@keyframes armShake {
+  0%, 100% { transform: rotate(-5deg); }
+  25%       { transform: rotate(-20deg) translateY(-2px); }
+  75%       { transform: rotate(10deg) translateY(-2px); }
+}
+
+/* ── Action badge animations ── */
+@keyframes badgePop {
+  0%   { opacity: 0; transform: scale(0.5) translateY(8px); }
+  60%  { transform: scale(1.1) translateY(-3px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes badgeBob {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* ── Enter pop-in on section change ── */
+@keyframes guideCharEnter {
+  0%   { opacity: 0.5; transform: scale(0.8) translateY(14px); }
+  50%  { transform: scale(1.08) translateY(-6px); opacity: 1; }
+  80%  { transform: scale(0.97) translateY(1px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ── Speech bubble pop-in ── */
+@keyframes guideBubbleEnter {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.88); }
+  55%  { transform: translateY(-3px) scale(1.03); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ── Sparkle dots ── */
+@keyframes guideSparkle {
+  0%   { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
+  25%  { opacity: 1; transform: translateY(-12px) scale(1) rotate(20deg); }
+  75%  { opacity: 0.5; transform: translateY(-32px) scale(0.7) rotate(-10deg); }
+  100% { transform: translateY(-52px) scale(0) rotate(30deg); opacity: 0; }
+}
+
+/* Animation classes */
+.guide-char-idle      { animation: guideCharIdle      2.5s ease-in-out infinite; }
+.guide-char-wave      { animation: guideCharWave      0.9s ease-in-out infinite; }
+.guide-char-bounce    { animation: guideCharBounce    0.75s ease-in-out infinite; }
+.guide-char-excited   { animation: guideCharExcited   0.6s ease-in-out infinite; }
+.guide-char-celebrate { animation: guideCharCelebrate 0.8s ease-in-out infinite; }
+.guide-char-enter     { animation: guideCharEnter     0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important; }
+
+.guide-bubble-enter { animation: guideBubbleEnter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.guide-bubble       { animation: guideBubbleEnter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+.guide-sparkle { animation: guideSparkle 1.6s ease-out infinite; color: oklch(0.72 0.17 60); }
+
+/* Reduced motion for guide */
+@media (prefers-reduced-motion: reduce) {
+  .guide-char-idle,
+  .guide-char-wave,
+  .guide-char-bounce,
+  .guide-char-excited,
+  .guide-char-celebrate,
+  .guide-char-enter,
+  .guide-bubble-enter,
+  .guide-sparkle {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
