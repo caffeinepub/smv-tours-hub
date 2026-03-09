@@ -45,18 +45,26 @@ export function Navbar() {
             onClick={() => handleLinkClick("#home")}
             className="flex items-center gap-3 group cursor-pointer"
           >
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: "oklch(0.65 0.18 45)" }}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="w-6 h-6 text-white"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
-              </svg>
+            {/* Animated logo wrapper */}
+            <div className="relative flex-shrink-0">
+              {/* Glow ring — visible on group hover */}
+              <div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(circle, oklch(0.65 0.18 45 / 0.55) 0%, transparent 72%)",
+                  filter: "blur(6px)",
+                  transform: "scale(1.3)",
+                }}
+              />
+              <img
+                src="/assets/generated/smv-logo-transparent.dim_300x300.png"
+                alt="SMV Tours Hub Logo"
+                className="relative h-12 w-12 object-contain spin-slow transition-transform duration-300 group-hover:scale-110"
+                style={{
+                  filter: "drop-shadow(0 0 6px oklch(0.65 0.18 45 / 0.4))",
+                }}
+              />
             </div>
             <div>
               <span className="block text-white font-display font-800 text-xl leading-tight tracking-tight">
