@@ -28,7 +28,7 @@ const contactItems = [
     sub: "Call / WhatsApp",
   },
   { icon: "📧", label: "info@smvtourshub.com", sub: "Email Us" },
-  { icon: "📍", label: "Mumbai, Maharashtra", sub: "India" },
+  { icon: "📍", label: "Hassan, Karnataka", sub: "India" },
   {
     icon: "⏰",
     label: "Mon – Sun: 6AM – 11PM",

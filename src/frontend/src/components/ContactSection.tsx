@@ -91,8 +91,8 @@ export function ContactSection() {
     {
       icon: "📍",
       label: "Our Office",
-      value: "Mumbai, Maharashtra, India",
-      sub: "Serving all of India",
+      value: "Hassan, Karnataka, India",
+      sub: "Hassan District, Karnataka",
       isFounder: false,
     },
   ];
