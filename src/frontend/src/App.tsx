@@ -9,6 +9,7 @@ import { HeroSection } from "./components/HeroSection";
 import { Navbar } from "./components/Navbar";
 import { ServicesSection } from "./components/ServicesSection";
 import { StatsSection } from "./components/StatsSection";
+import { TaxiClickEffect } from "./components/TaxiClickEffect";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
@@ -65,6 +66,9 @@ export default function App() {
 
       {/* Character Guide — fixed overlay explains each section */}
       <CharacterGuide />
+
+      {/* Taxi click sound + animation effect */}
+      <TaxiClickEffect />
 
       {/* Toast notifications */}
       <Toaster richColors position="top-right" />

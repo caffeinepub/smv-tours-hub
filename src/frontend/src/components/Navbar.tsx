@@ -47,22 +47,21 @@ export function Navbar() {
           >
             {/* Animated logo wrapper */}
             <div className="relative flex-shrink-0">
-              {/* Glow ring — visible on group hover */}
+              {/* Continuous glow pulse ring */}
               <div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                className="absolute inset-0 rounded-full pointer-events-none logo-glow-pulse"
                 style={{
                   background:
-                    "radial-gradient(circle, oklch(0.65 0.18 45 / 0.55) 0%, transparent 72%)",
-                  filter: "blur(6px)",
-                  transform: "scale(1.3)",
+                    "radial-gradient(circle, oklch(0.65 0.18 45 / 0.6) 0%, transparent 70%)",
+                  filter: "blur(8px)",
                 }}
               />
               <img
                 src="/assets/generated/smv-logo-transparent.dim_300x300.png"
                 alt="SMV Tours Hub Logo"
-                className="relative h-12 w-12 object-contain spin-slow transition-transform duration-300 group-hover:scale-110"
+                className="relative h-12 w-12 object-contain logo-float"
                 style={{
-                  filter: "drop-shadow(0 0 6px oklch(0.65 0.18 45 / 0.4))",
+                  filter: "drop-shadow(0 0 8px oklch(0.65 0.18 45 / 0.5))",
                 }}
               />
             </div>

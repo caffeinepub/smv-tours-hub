@@ -205,6 +205,62 @@
   100% { background-position: 1000px 0; }
 }
 
+/* ── LOGO ANIMATIONS ── */
+
+/* Float: gentle bob up/down */
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* Glow pulse: saffron radial glow breathes in/out */
+@keyframes logoGlowPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1.15);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.5);
+  }
+}
+
+/* Hover spin: one full rotation */
+@keyframes logoSpinOnce {
+  from { transform: translateY(-5px) rotate(0deg) scale(1.12); }
+  to   { transform: translateY(-5px) rotate(360deg) scale(1.12); }
+}
+
+.logo-float {
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.logo-glow-pulse {
+  animation: logoGlowPulse 3s ease-in-out infinite;
+}
+
+/* On hover: trigger spin-once via the group */
+.group:hover .logo-float {
+  animation: logoSpinOnce 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Resume float after spin stops (pointer leaves) */
+.group:not(:hover) .logo-float {
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-float,
+  .logo-glow-pulse {
+    animation: none !important;
+  }
+  .group:hover .logo-float {
+    animation: none !important;
+    transform: scale(1.1);
+  }
+}
+
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -1274,4 +1330,9 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* === CUSTOM TAXI CAR CURSOR === */
+*, *::before, *::after {
+  cursor: url('/assets/generated/taxi-cursor-v2-transparent.dim_32x32.png') 0 0, auto !important;
 }
