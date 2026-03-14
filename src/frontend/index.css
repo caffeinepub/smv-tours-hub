@@ -1332,7 +1332,3 @@
   }
 }
 
-/* === CUSTOM TAXI CAR CURSOR === */
-*, *::before, *::after {
-  cursor: url('/assets/generated/taxi-cursor-v2-transparent.dim_32x32.png') 0 0, auto !important;
-}
