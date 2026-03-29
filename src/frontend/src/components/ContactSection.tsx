@@ -76,8 +76,8 @@ export function ContactSection() {
     },
     {
       icon: "📞",
-      label: "Ravikumar",
-      value: "+91 63636 01311",
+      label: "Lokesh",
+      value: "+91 81235 27654",
       sub: "Call / WhatsApp",
       isFounder: false,
     },

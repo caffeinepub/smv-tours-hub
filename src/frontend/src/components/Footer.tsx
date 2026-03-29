@@ -24,7 +24,7 @@ const contactItems = [
   },
   {
     icon: "📞",
-    label: "Ravikumar: +91 63636 01311",
+    label: "Lokesh: +91 81235 27654",
     sub: "Call / WhatsApp",
   },
   { icon: "📧", label: "info@smvtourshub.com", sub: "Email Us" },
